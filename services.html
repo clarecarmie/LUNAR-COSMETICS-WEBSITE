@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lunar Beauty Website - Services</title>
+    <script src="https://kit.fontawesome.com/7a6c6b42a6.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* General Body and HTML */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Garamond', serif;
+        }
+
+        body {
+            background-color: #0d1a2f;
+            /* Dark Blue Moon Background */
+            color: #e0e8f0;
+            /* Light Gray Text */
+            font-family: 'Times New Roman', serif; /* Ensure body font matches */
+        }
+        
+        /* Dropdown content styling for navigation - Desktop specific */
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+            padding: 8px 0;
+            border-radius: 0 0 12px 12px; /* Adjusted for bottom rounding */
+        }
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            transition: background-color 0.3s ease;
+        }
+        .dropdown-content a:hover {
+            background-color: #f1f1f1;
+        }
+        /* Show dropdown content on hover for desktop */
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        /* Mobile-specific styles for dropdown in mobile menu */
+        @media (max-width: 767px) {
+            .dropdown-content.mobile-open {
+                display: block;
+                position: static; /* No absolute positioning in mobile menu */
+                min-width: auto;
+                box-shadow: none;
+                background-color: transparent;
+                padding: 0;
+                border-radius: 0;
+            }
+            .dropdown-content.mobile-open a {
+                padding-left: 2.5rem; /* Indent sub-items */
+                color: #e0e0e0; /* Lighter text for mobile menu background */
+            }
+            .dropdown-content.mobile-open a:hover {
+                background-color: rgba(255, 255, 255, 0.1);
+            }
+        }
+
+
+        /* Section First (Hero Section) */
+        .sectionFirst {
+            position: relative;
+            width: 100%;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            padding: 100px;
+            background: linear-gradient(to bottom, #1a2f4a, #0d1a2f);
+            /* Gradient for hero */
+            overflow: hidden;
+            /* Important for slide-in effect */
+            padding-top: 150px; /* Adjust for fixed header */
+        }
+
+        .sectionFirst h1 {
+            font-size: 4em;
+            color: #e0e8f0;
+            /* Light gray for heading */
+            margin-bottom: 20px;
+            text-align: center;
+            z-index: 2;
+            /* Ensure heading is above the image */
+        }
+
+        .transform-img {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            /* Make it fill the section */
+            pointer-events: none;
+            overflow: hidden;
+            /* Hide overflowing parts of the image */
+            transform: translateX(-100%);
+            /* Start off-screen to the left */
+            transition: transform 1s ease-out;
+            /* Add transition for slide-in */
+        }
+
+        .transform-img.active {
+            transform: translateX(0);
+            /* Slide into view */
+        }
+
+        .transform-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            /* Cover the area, cropping if necessary */
+            object-position: center;
+            /* Center the image within its container */
+            opacity: 0.6;
+            /* Slightly transparent */
+        }
+
+        /* About Services Section */
+        .aboutServices {
+            padding: 60px 100px;
+            text-align: center;
+            background-color: #b7b6bb;
+            /* Slightly darker background for services */
+        }
+
+        .ser-litText {
+            font-size: 1.5em;
+            color: #000000;
+            /* Blue for call to action */
+            margin-bottom: 10px;
+        }
+
+        .ser-text {
+            font-size: 1.2em;
+            color: #000000;
+            /* Lighter blue for description */
+            line-height: 1.6;
+            margin-bottom: 40px;
+        }
+
+        .ser-box {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            justify-content: center;
+        }
+
+        .ser-box .box {
+            background-color: #0d1a2f;
+            /* Header blue for service boxes */
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(11, 6, 46, 0.4);
+            transition: transform 0.3s ease;
+        }
+
+        .ser-box .box:hover {
+            transform: translateY(-10px);
+        }
+
+        .ser-box .box .img {
+            width: 100%;
+            height: 350px;
+            overflow: hidden;
+        }
+
+        .ser-box .box .img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .ser-box .boxinfo {
+            padding: 20px;
+            text-align: left;
+        }
+
+        .ser-name {
+            font-size: 1.4em;
+            font-weight: bold;
+            color: #e0e8f0;
+            /* Light gray for service names */
+            margin-bottom: 10px;
+        }
+
+        .ser-discription {
+            font-size: 0.95em;
+            color: #b0c4de;
+            /* Lighter blue for descriptions */
+            line-height: 1.5;
+        }
+
+        .section {
+            padding: 60px 100px;
+            background-color: #2a4879;
+        }
+
+        .card {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .card h2 {
+            /* Added specific styling for h2 inside card */
+            text-align: center;
+            color: #000000;
+            font-size: 3em;
+        }
+
+        .makeup-results h2 {
+            font-size: 3em;
+            margin-bottom: 30px;
+            color: rgb(0, 0, 0);
+        }
+
+        .image-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        /* Media Queries */
+        @media (max-width: 991px) {
+            .sectionFirst {
+                padding: 150px 40px 50px;
+            }
+
+            .sectionFirst h1 {
+                font-size: 2.5em;
+            }
+
+            .aboutServices {
+                padding: 40px 40px;
+            }
+
+            .ser-box {
+                grid-template-columns: 1fr;
+                /* Stack columns on smaller screens */
+            }
+
+             /* Media Queries for Image Gallery (Myself Section) */
+            @media screen and (max-width: 35px) {
+                .column {
+                    -ms-flex: 50%;
+                    flex: 50%;
+                    max-width: 50%;
+                }
+            }
+
+            @media screen and (max-width: 35px) {
+                .column {
+                    -ms-flex: 35%;
+                    flex: 35%;
+                    max-width: 35%;
+                }
+            }
+
+           }
+        .image-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr); /* 4 columns */
+            gap: 20px; /* Space between images */
+            max-width: 1200px; /* Limit grid width */
+            margin: 0 auto; /* Center the grid */
+            justify-items: center; /* Center images within their grid cells */
+        }
+        .image-grid img {
+            width: 100%; /* Make images fill their grid cell */
+            max-width: 250px; /* Adjust based on desired size */
+            height: 50;
+            border-radius: 8px; /* Slightly rounded corners for images */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+        }
+ }
+
+            /* Responsive Media Queries for the Gallery */
+            @media screen and (max-width: 991px) {
+                /* Adjust for header/overall mobile padding */
+                .section.myself-gallery {
+                    padding: 40px 40px;
+                }
+            }
+
+            @media screen and (max-width: 800px) {
+                .gallery-column {
+                    flex: 1 1 48%;
+                    /* Two columns on medium screens */
+                    max-width: 49%;
+                }
+            }
+
+            @media screen and (max-width: 600px) {
+                .gallery-column {
+                    flex: 1 1 95%;
+                    /* One column on small screens */
+                    max-width: 98%;
+                }
+            }
+
+
+            footer {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+ 
+
+<body>
+    <nav class="shadow-lg py-4 px-6 md:px-12 rounded-b-xl" style="background-color: #406697;">
+        <div class="container mx-auto flex justify-between items-center">
+            <a href="index.html" class="flex items-center space-x-2">
+                <img src="Lunar logo.jpg" alt="Lunar Cosmetics Logo" class="h-30 w-20"> <span class="text-2xl md:text-3xl font-bold text-black-800 tracking-wide">
+                    LUNAR COSMETICS
+                </span>
+            </a>
+
+            <div class="md:hidden">
+                <button id="mobile-menu-button" class="text-gray-600 focus:outline-none focus:text-purple-600">
+                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+
+            <div class="hidden md:flex space-x-8">
+                <a href="index.html" class="text-lg font-medium text-black-800 hover:text-purple-600 transition duration-300 ease-in-out">HOME</a>
+                <div class="relative dropdown">
+                    <a href="products.html" class="text-lg font-medium text-black-800 hover:text-purple-600 transition duration-300 ease-in-out inline-flex items-center">
+                        PRODUCTS
+                        <svg class="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </a>
+                    <div class="dropdown-content rounded-xl">
+                        <a href="products.html" class="filter-btn" data-category="all">All</a>
+                        <a href="products.html" class="filter-btn" data-category="face">Faces Makeup</a>
+                        <a href="products.html" class="filter-btn" data-category="eye">Eyes Makeup</a>
+                        <a href="products.html" class="filter-btn" data-category="lip">Lips Makeup</a>
+                    </div>
+                </div>
+                <a href="services.html" class="text-lg font-medium text-black-800 hover:text-purple-600 transition duration-300 ease-in-out">SERVICES</a>
+                <a href="about us.html" class="text-lg font-medium text-black-800 hover:text-purple-600 transition duration-300 ease-in-out">ABOUT US</a>
+                <a href="contact.html" class="text-lg font-medium text-black-800 hover:text-purple-600 transition duration-300 ease-in-out">CONTACT</a>
+            </div>
+        </div>
+
+        <div id="mobile-menu" class="md:hidden hidden bg-gray-800 text-white mt-4 rounded-xl shadow-inner">
+            <a href="index.html" class="block px-6 py-3 text-lg hover:bg-gray-700 transition duration-300 ease-in-out">HOME</a>
+            <div class="relative dropdown-mobile">
+                <a href="#" id="mobile-products-toggle" class="block px-6 py-3 text-lg hover:bg-gray-700 transition duration-300 ease-in-out flex items-center justify-between">
+                    PRODUCTS
+                    <svg class="ml-2 w-5 h-5 transform transition-transform duration-300" id="mobile-products-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </a>
+                <div class="dropdown-content mobile-products-dropdown">
+                    <a href="products.html" class="filter-btn block py-2 hover:bg-gray-700" data-category="all">All</a>
+                    <a href="products.html" class="filter-btn block py-2 hover:bg-gray-700" data-category="face">Faces Makeup</a>
+                    <a href="products.html" class="filter-btn block py-2 hover:bg-gray-700" data-category="eye">Eyes Makeup</a>
+                    <a href="products.html" class="filter-btn block py-2 hover:bg-gray-700" data-category="lip">Lips Makeup</a>
+                </div>
+            </div>
+            <a href="services.html" class="block px-6 py-3 text-lg hover:bg-gray-700 transition duration-300 ease-in-out">SERVICES</a>
+            <a href="about us.html" class="block px-6 py-3 text-lg hover:bg-gray-700 transition duration-300 ease-in-out">ABOUT US</a>
+            <a href="contact.html" class="block px-6 py-3 text-lg hover:bg-gray-700 transition duration-300 ease-in-out">CONTACT</a>
+        </div>
+    </nav>
+
+
+    <section class="sectionFirst" id="home">
+        <h1>Services</h1>
+
+        <div class="transform-img" id="heroImage">
+            <img src="background 3.jpg" alt="Soft-focus background image representing beauty services">
+        </div>
+    </section>
+
+
+    <section class="aboutServices" id="services">
+        <div class="ser-litText">Grace in Every Glam</div>
+        <p class="ser-text">Explore our timeless makeup service collection.</p>
+
+        <div class="ser-box">
+            <div class="box">
+                <div class="img">
+                    <img src="bridal makeup.jpg" alt="Bride with elegant makeup">
+                </div>
+                <div class="boxinfo">
+                    <div class="ser-name"> Bridal Makeup </div>
+                    <p class="ser-discription"> Signature bridal glam to make you shine on your big day. Includes skin
+                        prep + mini touch-up kit.</p>
+                </div>
+            </div>
+            <div class="box">
+                <div class="img">
+                    <img src="tunang.jpg" alt="Person with engagement makeup, soft and radiant">
+                </div>
+                <div class="boxinfo">
+                    <div class="ser-name">Engagement / Reception Makeup </div>
+                    <p class="ser-discription">Soft glow or full glam to match your dress and vibes.</p>
+                </div>
+            </div>
+            <div class="box">
+                <div class="img">
+                    <img src="event makeup.jpg" alt="Person with dramatic party makeup for an event">
+                </div>
+                <div class="boxinfo">
+                    <div class="ser-name">Event / Party Makeup </div>
+                    <p class="ser-discription">For birthdays, dinner dates, or any special event. Lashes included.</p>
+                </div>
+            </div>
+            <div class="box">
+                <div class="img">
+                    <img src="photoshoot makeup 2.jpg" alt="Model posing with professional photoshoot makeup">
+                </div>
+                <div class="boxinfo">
+                    <div class="ser-name">Photoshoot Makeup</div>
+                    <p class="ser-discription">Photo-perfect look for studio or outdoor shoots no filter needed.</p>
+                </div>
+            </div>
+            <div class="box">
+                <div class="img">
+                    <img src="creative makeup.jpg" alt="Person with artistic, creative makeup">
+                </div>
+                <div class="boxinfo">
+                    <div class="ser-name">Editorial / Creative Makeup</div>
+                    <p class="ser-discription">Dramatic, high-fashion, or themed looks for shoots or campaigns.</p>
+                </div>
+            </div>
+            <div class="box">
+                <div class="img">
+                    <img src="interview.jpg" alt="Professional looking person with subtle corporate makeup">
+                </div>
+                <div class="boxinfo">
+                    <div class="ser-name">Corporate / Interview Makeup</div>
+                    <p class="ser-discription">Natural, polished, and professional – ideal for headshots or formal
+                        events.</p>
+                </div>
+            </div>
+            <div class="box">
+                <div class="img">
+                    <img src="graduate 3.jpg" alt="Smiling graduate with natural, fresh makeup">
+                </div>
+                <div class="boxinfo">
+                    <div class="ser-name">Student / Graduation Makeup</div>
+                    <p class="ser-discription">Celebrate your graduation day with a fresh, glowy look. Includes basic
+                        lashes.</p>
+                </div>
+            </div>
+            <div class="box">
+                <div class="img">
+                    <img src="men makeup.jpg" alt="Man with light grooming makeup for a natural look">
+                </div>
+                <div class="boxinfo">
+                    <div class="ser-name">Makeup for Men / Grooming </div>
+                    <p class="ser-discription"> Light makeup for men to even out skin tone for photoshoots, weddings, or
+                        public appearances.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="section">
+        <div class="card">
+            <h2>MAKEUP VIDEO</h2>
+            <div class="image-row">
+                <video width="320" height="240" autoplay controls muted>
+                    <source src="videomakeup 2.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+
+                <video width="320" height="240" autoplay controls muted>
+                    <source src="makeup video 1.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+
+                <video width="320" height="240" autoplay controls muted>
+                    <source src="videomakeup3.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+        </div>
+    </div>
+
+    <section class="aboutServices">
+         <div class="container">
+        <div class="makeup-results">
+            <h2>MAKEUP RESULT</h2>
+            <div class="image-grid">
+                <img src="FB1.jpg" alt="Makeup Result 1">
+                <img src="FB2.jpg" alt="Makeup Result 2">
+                <img src="FB3.jpg" alt="Makeup Result 3">
+                <img src="FB4.jpg" alt="Makeup Result 4">
+                <img src="FB5.jpg" alt="Makeup Result 5">
+                <img src="FB6.jpg" alt="Makeup Result 6">
+                <img src="FB7.jpg" alt="Makeup Result 7">
+                <img src="FB8.jpg" alt="Makeup Result 8">
+                <img src="FB9.jpg" alt="Makeup Result 9">
+                <img src="FB10.jpg" alt="Makeup Result 10">
+                <img src="FB11.jpg" alt="Makeup Result 11">
+                <img src="FB12.jpg" alt="Makeup Result 12">
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-gray-900 text-gray-300 py-12 rounded-t-xl">
+        <div class="container mx-auto px-6 md:px-12 grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div>
+                <h3 class="text-2xl font-bold text-white mb-4">LUNAR COSMETICS</h3>
+                <p class="text-gray-400 leading-relaxed">
+                    Bringing celestial beauty to your everyday life. Discover products that make you shine.
+                </p>
+            </div>
+            </div>
+
+        <div class="mt-10 border-t border-gray-700 pt-8 text-center text-gray-500">
+            &copy; 2025 LUNAR COSMETICS. All rights reserved.
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Slide-in effect for the hero background image
+            const heroImage = document.getElementById('heroImage');
+            // Add a slight delay to ensure CSS is rendered before animation starts
+            setTimeout(() => {
+                heroImage.classList.add('active');
+            }, 100); // 100ms delay
+
+            // --- Mobile Menu Logic (from products.html) ---
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const mobileProductsToggle = document.getElementById('mobile-products-toggle');
+            const mobileProductsDropdown = document.querySelector('.mobile-products-dropdown');
+            const mobileProductsIcon = document.getElementById('mobile-products-icon');
+
+            if (mobileMenuButton && mobileMenu) {
+                mobileMenuButton.addEventListener('click', function() {
+                    mobileMenu.classList.toggle('hidden');
+                    // Close mobile product dropdown if main menu is closed
+                    if (mobileMenu.classList.contains('hidden')) {
+                        mobileProductsDropdown.classList.remove('mobile-open');
+                        mobileProductsIcon.classList.remove('rotate-180');
+                    }
+                });
+            }
+
+            if (mobileProductsToggle && mobileProductsDropdown && mobileProductsIcon) {
+                mobileProductsToggle.addEventListener('click', function(event) {
+                    event.preventDefault(); // Prevent default link behavior
+                    mobileProductsDropdown.classList.toggle('mobile-open');
+                    mobileProductsIcon.classList.toggle('rotate-180'); // Rotate arrow icon
+                });
+            }
+            
+            // This part is for consistency in navigation, though no actual filtering happens on this page.
+            // It ensures that if a product category link is clicked, it behaves like a normal link.
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            filterButtons.forEach(button => {
+                button.addEventListener('click', function(event) {
+                    // This page doesn't filter, so let the link work normally or add specific logic if needed
+                    // For now, it will navigate to products.html if these links are clicked
+                });
+            });
+
+        });
+    </script>
+</body>
+</html>

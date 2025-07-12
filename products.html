@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LUNAR COSMETICS - Home</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            font-family: 'Times New Roman', serif;
+            color: #000000; /* Default text color */
+        }
+        /* Custom styles for product cards to match the previous example's hover effect */
+        .product-card {
+            background-color: #fff; /* Ensure product cards have a background */
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+            transition: transform 0.2s ease-in-out;
+        }
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+        /* Style to hide products initially - KEEP THIS */
+        .hidden-product {
+            display: none;
+        }
+        /* Dropdown content styling for navigation - Desktop specific */
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+            padding: 8px 0;
+            border-radius: 0 0 12px 12px; /* Adjusted for bottom rounding */
+        }
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            transition: background-color 0.3s ease;
+        }
+        .dropdown-content a:hover {
+            background-color: #f1f1f1;
+        }
+        /* Show dropdown content on hover for desktop */
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        /* Mobile-specific styles for dropdown in mobile menu */
+        @media (max-width: 767px) {
+            .dropdown-content.mobile-open {
+                display: block;
+                position: static; /* No absolute positioning in mobile menu */
+                min-width: auto;
+                box-shadow: none;
+                background-color: transparent;
+                padding: 0;
+                border-radius: 0;
+            }
+            .dropdown-content.mobile-open a {
+                padding-left: 2.5rem; /* Indent sub-items */
+                color: #e0e0e0; /* Lighter text for mobile menu background */
+            }
+            .dropdown-content.mobile-open a:hover {
+                background-color: rgba(255, 255, 255, 0.1);
+            }
+        }
+    </style>
+</head>
+<body class="text-gray-800 bg-gray-100">
+    <nav class="bg-white shadow-lg py-4 px-6 md:px-12 rounded-b-xl">
+        <div class="container mx-auto flex justify-between items-center">
+            <a href="index.html" class="flex items-center space-x-2">
+                <img src="Lunar logo.jpg" alt="Lunar Cosmetics Logo" class="h-30 w-20"> <span class="text-3xl md:text-3xl font-bold text-black-600 tracking-wide">
+                    LUNAR COSMETICS
+                </span>
+            </a>
+
+            <div class="md:hidden">
+                <button id="mobile-menu-button" class="text-gray-600 focus:outline-none focus:text-purple-600">
+                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+
+            <div class="hidden md:flex space-x-8">
+                <a href="index.html" class="text-lg font-medium text-gray-600 hover:text-purple-600 transition duration-300 ease-in-out">HOME</a>
+                <div class="relative dropdown">
+                    <a href="#" class="text-lg font-medium text-gray-600 hover:text-purple-600 transition duration-300 ease-in-out inline-flex items-center">
+                        PRODUCTS
+                        <svg class="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </a>
+                    <div class="dropdown-content rounded-xl">
+                        <a href="#" class="filter-btn" data-category="all">All</a>
+                        <a href="#" class="filter-btn" data-category="face">Faces Makeup</a>
+                        <a href="#" class="filter-btn" data-category="eye">Eyes Makeup</a>
+                        <a href="#" class="filter-btn" data-category="lip">Lips Makeup</a>
+                    </div>
+                </div>
+                <a href="services.html" class="text-lg font-medium text-gray-600 hover:text-purple-600 transition duration-300 ease-in-out">SERVICES</a>
+                <a href="about us.html" class="text-lg font-medium text-gray-600 hover:text-purple-600 transition duration-300 ease-in-out">ABOUT US</a>
+                <a href="contact.html" class="text-lg font-medium text-gray-600 hover:text-purple-600 transition duration-300 ease-in-out">CONTACT</a>
+            </div>
+        </div>
+
+        <div id="mobile-menu" class="md:hidden hidden bg-gray-800 text-white mt-4 rounded-xl shadow-inner">
+            <a href="index.html" class="block px-6 py-3 text-lg hover:bg-gray-700 transition duration-300 ease-in-out">HOME</a>
+            <div class="relative dropdown-mobile">
+                <a href="#" id="mobile-products-toggle" class="block px-6 py-3 text-lg hover:bg-gray-700 transition duration-300 ease-in-out flex items-center justify-between">
+                    PRODUCTS
+                    <svg class="ml-2 w-5 h-5 transform transition-transform duration-300" id="mobile-products-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </a>
+                <div class="dropdown-content mobile-products-dropdown">
+                    <a href="#" class="filter-btn block py-2 hover:bg-gray-700" data-category="all">All</a>
+                    <a href="#" class="filter-btn block py-2 hover:bg-gray-700" data-category="face">Faces Makeup</a>
+                    <a href="#" class="filter-btn block py-2 hover:bg-gray-700" data-category="eye">Eyes Makeup</a>
+                    <a href="#" class="filter-btn block py-2 hover:bg-gray-700" data-category="lip">Lips Makeup</a>
+                </div>
+            </div>
+            <a href="services.html" class="block px-6 py-3 text-lg hover:bg-gray-700 transition duration-300 ease-in-out">SERVICES</a>
+            <a href="about us.html" class="block px-6 py-3 text-lg hover:bg-gray-700 transition duration-300 ease-in-out">ABOUT US</a>
+            <a href="contact.html" class="block px-6 py-3 text-lg hover:bg-gray-700 transition duration-300 ease-in-out">CONTACT</a>
+        </div>
+    </nav>
+
+    <section class="py-16 md:py-24 bg-white rounded-xl shadow-md mx-6 md:mx-12 my-8">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-black-700" id="product-section-title">ALL PRODUCTS</h2>
+            <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="product-card bg-gray-50 p-6 rounded-2xl shadow-lg hover:shadow-xl transform hover:-translate-y-2 transition duration-300 ease-in-out border border-purple-100" data-category="face">
+                    <img src="Lunar foundation .png" onerror="this.onerror=null;this.src='https://placehold.co/300x200/E0E7FF/333333?text=LUNAR%20FOUNDATION';" alt="LUNAR FOUNDATION" class="w-full h-48 object-cover rounded-xl mb-6 shadow-sm">
+                    <h3 class="text-xl md:text-2xl font-semibold text-gray-900 text-center mb-2">LUNAR FOUNDATION</h3>
+                    <p class="text-gray-600 mb-4 text-sm md:text-base">Achieve a luminous complexion with our hydrating foundation, infused with lunar extracts.</p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-xl md:text-2xl font-bold text-black-600">RM45.00</span>
+                        <button class="bg-blue-200 text-black-600 font-bold py-2 px-4 md:py-3 md:px-6 rounded-full hover:bg-blue-700 transition duration-300 ease-in-out shadow-md text-sm md:text-base">Add to Cart</button>
+                    </div>
+                </div>
+
+                <div class="product-card bg-gray-50 p-6 rounded-2xl shadow-lg hover:shadow-xl transform hover:-translate-y-2 transition duration-300 ease-in-out border border-purple-100" data-category="face">
+                    <img src="Lunar blusher.png" onerror="this.onerror=null;this.src='https://placehold.co/300x200/E0E7FF/333333?text=LUNAR%20BLUSHER';" alt="LUNAR BLUSHER" class="w-full h-48 object-cover rounded-xl mb-6 shadow-sm">
+                    <h3 class="text-xl md:text-2xl font-semibold text-gray-900 text-center mb-2">LUNAR BLUSHER</h3>
+                    <p class="text-gray-600 mb-4 text-sm md:text-base">For a radiant finish, a dusting of this blusher is all you need.</p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-xl md:text-2xl font-bold text-black-600">RM22.90</span>
+                        <button class="bg-blue-200 text-black-600 font-bold py-2 px-4 md:py-3 md:px-6 rounded-full hover:bg-blue-700 transition duration-300 ease-in-out shadow-md text-sm md:text-base">Add to Cart</button>
+                    </div>
+                </div>
+
+                <div class="product-card bg-gray-50 p-6 rounded-2xl shadow-lg hover:shadow-xl transform hover:-translate-y-2 transition duration-300 ease-in-out border border-purple-100" data-category="lip">
+                    <img src="Lunar lipgloss.png" onerror="this.onerror=null;this.src='https://placehold.co/300x200/E0E7FF/333333?text=LUNAR%20LIP%20GLOSS';" alt="LUNAR LIP GLOSS" class="w-full h-48 object-cover rounded-xl mb-6 shadow-sm">
+                    <h3 class="text-xl md:text-2xl font-semibold text-gray-900 text-center mb-2">LUNAR LIP GLOSS</h3>
+                    <p class="text-gray-600 mb-4 text-sm md:text-base">High-shine gloss with a hint of shimmer, for lips that sparkle like the night sky.</p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-xl md:text-2xl font-bold text-black-600">RM15.00</span>
+                        <button class="bg-blue-200 text-black-600 font-bold py-2 px-4 md:py-3 md:px-6 rounded-full hover:bg-blue-700 transition duration-300 ease-in-out shadow-md text-sm md:text-base">Add to Cart</button>
+                    </div>
+                </div>
+
+                <div class="product-card bg-gray-50 p-6 rounded-2xl shadow-lg hover:shadow-xl transform hover:-translate-y-2 transition duration-300 ease-in-out border border-purple-100" data-category="lip">
+                    <img src="Lunar lipmatte.png" onerror="this.onerror=null;this.src='https://placehold.co/300x200/E0E7FF/333333?text=LUNAR%20LIP%20MATTE';" alt="LUNAR LIP MATTE" class="w-full h-48 object-cover rounded-xl mb-6 shadow-sm">
+                    <h3 class="text-xl md:text-2xl font-semibold text-gray-900 text-center mb-2">LUNAR LIP MATTE</h3>
+                    <p class="text-gray-600 mb-4 text-sm md:text-base">Achieve a sophisticated look with our collection of stunning matte lip colors.</p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-xl md:text-2xl font-bold text-black-600">RM19.90</span>
+                        <button class="bg-blue-200 text-black-600 font-bold py-2 px-4 md:py-3 md:px-6 rounded-full hover:bg-blue-700 transition duration-300 ease-in-out shadow-md text-sm md:text-base">Add to Cart</button>
+                    </div>
+                </div>
+
+                <div class="product-card bg-gray-50 p-6 rounded-2xl shadow-lg hover:shadow-xl transform hover:-translate-y-2 transition duration-300 ease-in-out border border-purple-100" data-category="face">
+                    <img src="Lunar contour.png" onerror="this.onerror=null;this.src='https://placehold.co/300x200/E0E7FF/333333?text=LUNAR%20CONTOUR';" alt="LUNAR CONTOUR" class="w-full h-48 object-cover rounded-xl mb-6 shadow-sm">
+                    <h3 class="text-xl md:text-2xl font-semibold text-gray-900 text-center mb-2">LUNAR CONTOUR</h3>
+                    <p class="text-gray-600 mb-4 text-sm md:text-base">Define your features with our blendable contour products.</p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-xl md:text-2xl font-bold text-black-600">RM25.00</span>
+                        <button class="bg-blue-200 text-black-600 font-bold py-2 px-4 md:py-3 md:px-6 rounded-full hover:bg-blue-700 transition duration-300 ease-in-out shadow-md text-sm md:text-base">Add to Cart</button>
+                    </div>
+                </div>
+
+                <div class="product-card bg-gray-50 p-6 rounded-2xl shadow-lg hover:shadow-xl transform hover:-translate-y-2 transition duration-300 ease-in-out border border-purple-100" data-category="face">
+                    <img src="Lunar primer.png" onerror="this.onerror=null;this.src='https://placehold.co/300x200/E0E7FF/333333?text=LUNAR%20PRIMER';" alt="LUNAR PRIMER" class="w-full h-48 object-cover rounded-xl mb-6 shadow-sm">
+                    <h3 class="text-xl md:text-2xl font-semibold text-gray-900 text-center mb-2">LUNAR PRIMER</h3>
+                    <p class="text-gray-600 mb-4 text-sm md:text-base">Create a smooth canvas for your makeup with our lightweight primer.</p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-xl md:text-2xl font-bold text-black-600">RM34.50</span>
+                        <button class="bg-blue-200 text-black-600 font-bold py-2 px-4 md:py-3 md:px-6 rounded-full hover:bg-blue-700 transition duration-300 ease-in-out shadow-md text-sm md:text-base">Add to Cart</button>
+                    </div>
+                </div>
+
+                <div class="product-card bg-gray-50 p-6 rounded-2xl shadow-lg hover:shadow-xl transform hover:-translate-y-2 transition duration-300 ease-in-out border border-purple-100" data-category="eye">
+                    <img src="Lunar mascara.png" onerror="this.onerror=null;this.src='https://placehold.co/300x200/E0E7FF/333333?text=LUNAR%20MASCARA';" alt="LUNAR MASCARA" class="w-full h-48 object-cover rounded-xl mb-6 shadow-sm">
+                    <h3 class="text-xl md:text-2xl font-semibold text-gray-900 text-center mb-2">LUNAR MASCARA</h3>
+                    <p class="text-gray-600 mb-4 text-sm md:text-base">COMES WITH 2 TYPES OF BRUSH, THICK & THIN. Achieve voluminous lashes with our lengthening mascara.</p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-xl md:text-2xl font-bold text-black-600">RM18.50</span>
+                        <button class="bg-blue-200 text-black-600 font-bold py-2 px-4 md:py-3 md:px-6 rounded-full hover:bg-blue-700 transition duration-300 ease-in-out shadow-md text-sm md:text-base">Add to Cart</button>
+                    </div>
+                </div>
+
+                <div class="product-card bg-gray-50 p-6 rounded-2xl shadow-lg hover:shadow-xl transform hover:-translate-y-2 transition duration-300 ease-in-out border border-purple-100" data-category="eye">
+                    <img src="Lunar eyeshadow.png" onerror="this.onerror=null;this.src='https://placehold.co/300x200/E0E7FF/333333?text=LUNAR%20EYESHADOW';" alt="LUNAR EYESHADOW" class="w-full h-48 object-cover rounded-xl mb-6 shadow-sm">
+                    <h3 class="text-xl md:text-2xl font-semibold text-gray-900 text-center mb-2">LUNAR EYESHADOW</h3>
+                    <p class="text-gray-600 mb-4 text-sm md:text-base">Achieve a celestial look with our highly pigmented eyeshadow palette.</p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-xl md:text-2xl font-bold text-black-600">RM26.90</span>
+                        <button class="bg-blue-200 text-black-600 font-bold py-2 px-4 md:py-3 md:px-6 rounded-full hover:bg-blue-700 transition duration-300 ease-in-out shadow-md text-sm md:text-base">Add to Cart</button>
+                    </div>
+                </div>
+
+                <div class="product-card bg-gray-50 p-6 rounded-2xl shadow-lg hover:shadow-xl transform hover:-translate-y-2 transition duration-300 ease-in-out border border-purple-100" data-category="eye">
+                    <img src="Lunar eyebrow.png" onerror="this.onerror=null;this.src='https://placehold.co/300x200/E0E7FF/333333?text=LUNAR%20EYEBROW';" alt="LUNAR EYEBROW" class="w-full h-48 object-cover rounded-xl mb-6 shadow-sm">
+                    <h3 class="text-xl md:text-2xl font-semibold text-gray-900 text-center mb-2">LUNAR EYEBROW</h3>
+                    <p class="text-gray-600 mb-4 text-sm md:text-base">Achieve perfectly defined brows with our easy-to-use eyebrow pencil.</p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-xl md:text-2xl font-bold text-black-600">RM20.00</span>
+                        <button class="bg-blue-200 text-black-600 font-bold py-2 px-4 md:py-3 md:px-6 rounded-full hover:bg-blue-700 transition duration-300 ease-in-out shadow-md text-sm md:text-base">Add to Cart</button>
+                    </div>
+                </div>
+
+                <div class="product-card bg-gray-50 p-6 rounded-2xl shadow-lg hover:shadow-xl transform hover:-translate-y-2 transition duration-300 ease-in-out border border-purple-100" data-category="face">
+                    <img src="Lunar Setting Spray.png" onerror="this.onerror=null;this.src='https://placehold.co/300x200/E0E7FF/333333?text=LUNAR%20SETTING%20SPRAY';" alt="LUNAR SETTING SPRAY" class="w-full h-48 object-cover rounded-xl mb-6 shadow-sm">
+                    <h3 class="text-xl md:text-2xl font-semibold text-gray-900 text-center mb-2">LUNAR SETTING SPRAY</h3>
+                    <p class="text-gray-600 mb-4 text-sm md:text-base">Lock in your makeup with our long-lasting setting spray.</p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-xl md:text-2xl font-bold text-black-600">RM20.00</span>
+                        <button class="bg-blue-200 text-black-600 font-bold py-2 px-4 md:py-3 md:px-6 rounded-full hover:bg-blue-700 transition duration-300 ease-in-out shadow-md text-sm md:text-base">Add to Cart</button>
+                    </div>
+                </div>
+
+                <div class="product-card bg-gray-50 p-6 rounded-2xl shadow-lg hover:shadow-xl transform hover:-translate-y-2 transition duration-300 ease-in-out border border-purple-100" data-category="eye">
+                    <img src="Lunar Eyeliner.png" onerror="this.onerror=null;this.src='https://placehold.co/300x200/E0E7FF/333333?text=LUNAR%20EYELINER';" alt="LUNAR EYELINER" class="w-full h-48 object-cover rounded-xl mb-6 shadow-sm">
+                    <h3 class="text-xl md:text-2xl font-semibold text-gray-900 text-center mb-2">LUNAR EYELINER</h3>
+                    <p class="text-gray-600 mb-4 text-sm md:text-base">Achieve precise lines with our easy-to-use liquid eyeliner.</p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-xl md:text-2xl font-bold text-black-600">RM16.99</span>
+                        <button class="bg-blue-200 text-black-600 font-bold py-2 px-4 md:py-3 md:px-6 rounded-full hover:bg-blue-700 transition duration-300 ease-in-out shadow-md text-sm md:text-base">Add to Cart</button>
+                    </div>
+                </div>
+
+            </div>
+
+            </div>
+    </section>
+
+    <footer class="bg-gray-900 text-gray-300 py-12 rounded-t-xl">
+        <div class="container mx-auto px-6 md:px-12 grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div>
+                <h3 class="text-2xl font-bold text-white mb-4">LUNAR COSMETICS</h3>
+                <p class="text-gray-400 leading-relaxed">
+                    Bringing celestial beauty to your everyday life. Discover products that make you shine.
+                </p>
+            </div>
+            </div>
+
+        <div class="mt-10 border-t border-gray-700 pt-8 text-center text-gray-500">
+            &copy; 2025 LUNAR COSMETICS. All rights reserved.
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // --- Mobile Menu Logic ---
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const mobileProductsToggle = document.getElementById('mobile-products-toggle');
+            const mobileProductsDropdown = document.querySelector('.mobile-products-dropdown');
+            const mobileProductsIcon = document.getElementById('mobile-products-icon');
+
+            if (mobileMenuButton && mobileMenu) {
+                mobileMenuButton.addEventListener('click', function() {
+                    mobileMenu.classList.toggle('hidden');
+                    // Close mobile product dropdown if main menu is closed
+                    if (mobileMenu.classList.contains('hidden')) {
+                        mobileProductsDropdown.classList.remove('mobile-open');
+                        mobileProductsIcon.classList.remove('rotate-180');
+                    }
+                });
+            }
+
+            if (mobileProductsToggle && mobileProductsDropdown && mobileProductsIcon) {
+                mobileProductsToggle.addEventListener('click', function(event) {
+                    event.preventDefault(); // Prevent default link behavior
+                    mobileProductsDropdown.classList.toggle('mobile-open');
+                    mobileProductsIcon.classList.toggle('rotate-180'); // Rotate arrow icon
+                });
+            }
+
+
+            // --- Product Filtering Logic (simplified as "View All" is removed) ---
+            const allProductCards = document.querySelectorAll('.product-card');
+            const productSectionTitle = document.getElementById('product-section-title');
+            const filterButtons = document.querySelectorAll('.filter-btn'); // Includes desktop and mobile filter buttons
+
+            // Function to apply filter from dropdown
+            function applyCategoryFilter(category, isFromMobileMenu = false) {
+                allProductCards.forEach(card => {
+                    const productCategory = card.getAttribute('data-category');
+
+                    if (category === 'all' || productCategory === category) {
+                        card.classList.remove('hidden-product'); // Always show all products for the selected category
+                    } else {
+                        card.classList.add('hidden-product'); // Hide products not in the selected category
+                    }
+                });
+
+                // Update the section title
+                if (category === 'all') {
+                    productSectionTitle.textContent = 'ALL PRODUCTS';
+                } else if (category === 'face') {
+                    productSectionTitle.textContent = 'FACES MAKEUP';
+                } else if (category === 'eye') {
+                    productSectionTitle.textContent = 'EYES MAKEUP';
+                } else if (category === 'lip') {
+                    productSectionTitle.textContent = 'LIPS MAKEUP';
+                }
+
+                // If filter was clicked from mobile menu, close the mobile menu
+                if (isFromMobileMenu && mobileMenu && !mobileMenu.classList.contains('hidden')) {
+                    mobileMenu.classList.add('hidden');
+                    mobileProductsDropdown.classList.remove('mobile-open'); // Also close products dropdown
+                    mobileProductsIcon.classList.remove('rotate-180');
+                }
+            }
+
+            // Add click event listeners to filter buttons (desktop & mobile dropdowns)
+            filterButtons.forEach(button => {
+                button.addEventListener('click', function(event) {
+                    event.preventDefault();
+                    const category = this.getAttribute('data-category');
+                    const isFromMobile = this.closest('.mobile-products-dropdown') !== null;
+                    applyCategoryFilter(category, isFromMobile);
+                });
+            });
+
+            // Initial setup on page load: Show all products and set title to "ALL PRODUCTS"
+            applyCategoryFilter('all');
+            productSectionTitle.textContent = 'ALL PRODUCTS';
+        });
+    </script>
+</body>
+</html>

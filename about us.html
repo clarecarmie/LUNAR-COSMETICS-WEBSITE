@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>About Us</title>
+  <link href="https://fonts.googleapis.com/css2?family=Philosopher&family=Poppins&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="script.js" defer></script>
+  <style>
+   
+    :root {
+      --navy: #0a0d2f;
+      --white: #ffffff;
+      --gold: #d4af37;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Garamond', sans-serif;
+    }
+
+    body {
+      background-color: var(--navy);
+      color: var(--white);
+      overflow-x: hidden;
+    }
+
+    section {
+      max-width: 1100px;
+      margin: 60px auto;
+      padding: 25px;
+      background: var(--navy);
+      border: 3px solid var(--gold);
+      border-radius: 16px;
+      animation: fadeIn 1.2s ease both;
+    }
+
+    section h2 {
+      font-size: clamp(1.8em, 2.5vw, 2.5em);
+      color: var(--gold);
+      margin-bottom: 15px;
+      text-align: center;
+      font-family: 'Philosopher', sans-serif;
+      text-shadow: 0 0 8px rgb(211, 162, 0);
+    }
+
+    section p {
+      font-size: clamp(16px, 1.1vw, 18px);
+      line-height: 1.8;
+      color: #e0e0e0;
+      margin-bottom: 20px;
+      text-align: justify;
+    }
+
+    .hero {
+      width: 100%;
+      height: 400px;
+      background-image: url('lunarhero.jpeg');
+      background-size: cover;
+      background-position: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: rgba(10, 13, 47, 0.6);
+    }
+
+    .hero-text {
+      position: relative;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(8px);
+      padding: 25px 50px;
+      border-radius: 12px;
+      text-align: center;
+      color: var(--gold);
+      animation: slideUp 1s ease-in-out;
+    }
+
+    .hero-text h1 {
+      font-size: clamp(2em, 5vw, 3em);
+      margin: 0;
+      text-shadow: 0 0 12px rgb(0, 156, 254);
+    }
+
+    #tagline p {
+      text-align: center;
+      font-size: 19px;
+      font-style: italic;
+      color: #ccc;
+    }
+
+    .timeline-section {
+      margin-top: 80px;
+    }
+
+    .timeline-title {
+      text-align: center;
+      font-size: 2.5em;
+      font-weight: bold;
+      margin-bottom: 60px;
+      color: var(--gold);
+      text-shadow: 0 0 6px rgba(212, 175, 55, 0.4);
+    }
+
+    .timeline-item {
+      display: flex;
+      margin-bottom: 50px;
+      align-items: flex-start;
+      gap: 20px;
+      animation: fadeIn 1.2s ease both;
+    }
+
+    .timeline-image {
+      width: 30%;
+    }
+
+    .timeline-image img {
+      width: 100%;
+      border-radius: 10px;
+      border: 3px solid var(--white);
+    }
+
+    .timeline-content {
+      width: 70%;
+      position: relative;
+      padding-left: 20px;
+      border-left: 2px solid var(--gold);
+    }
+
+    .timeline-content::before {
+      content: '';
+      width: 12px;
+      height: 12px;
+      background: var(--gold);
+      border-radius: 50%;
+      position: absolute;
+      left: -7px;
+      top: 5px;
+    }
+
+    .timeline-content h3 {
+      margin: 0;
+      font-size: 20px;
+      color: var(--gold);
+    }
+
+    .timeline-content p {
+      font-size: 15px;
+      color: #ccc;
+      margin-top: 8px;
+      line-height: 1.6;
+    }
+
+    .team-intro {
+      text-align: center;
+      font-size: 1.2em;
+      max-width: 700px;
+      margin: 0 auto 50px;
+      color: #dcdcdc;
+    }
+
+    .team-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+    }
+
+    .team-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 30px;
+    }
+    
+    .row-2 {
+  margin-top: 40px; /* jarak antara row 1 dan row 2 */
+}
+
+    .team-member {
+      background-color: rgba(255, 255, 255, 0.07);
+      border: 1px solid var(--gold);
+      border-radius: 15px;
+      overflow: hidden;
+      padding: 20px;
+      width: 100%;
+      max-width: 300px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      animation: fadeIn 1s ease both;
+    }
+
+    
+    
+.team-member:hover {
+  box-shadow: 0 0 20px rgba(212, 175, 55, 0.6);
+}
+    
+    /* ✨ Extra effect: glow, floating, animated border */
+.team-member {
+  position: relative;
+  z-index: 1;
+  animation: floatCard 5s ease-in-out infinite alternate, fadeIn 1s ease both;
+}
+
+.team-member::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  border-radius: 16px;
+  background: linear-gradient(45deg, transparent, var(--gold), transparent);
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  z-index: -1;
+}
+
+.team-member:hover::before {
+  opacity: 0.4;
+}
+
+@keyframes floatCard {
+  0% {
+    transform: translateY(0);
+    box-shadow: 0 0 5px rgba(212, 175, 55, 0.3);
+  }
+  50% {
+    transform: translateY(-6px);
+    box-shadow: 0 0 15px rgba(212, 175, 55, 0.5);
+  }
+  100% {
+    transform: translateY(0);
+    box-shadow: 0 0 5px rgba(212, 175, 55, 0.3);
+  }
+}
+
+    .team-member img {
+      width: 100%;
+      height: 280px;
+      object-fit: cover;
+      border-radius: 10px;
+      margin-bottom: 15px;
+      border: 2px solid var(--gold);
+    }
+
+    .team-member h3 {
+      font-family: 'Philosopher', sans-serif;
+      color: var(--gold);
+      margin-bottom: 5px;
+      font-size: 1.1em;
+    }
+
+    .team-member h4 {
+      font-size: 1em;
+      color: #cccccc;
+      margin-bottom: 10px;
+    }
+
+    .team-member p {
+      font-size: 0.95em;
+      line-height: 1.5;
+      color: #e0e0e0;
+    }
+
+    footer {
+      text-align: center;
+      padding: 25px 15px;
+      color: #aaa;
+      font-size: 0.9em;
+      background-color: #0a0d2f;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    /* Animations */
+    @keyframes fadeIn {
+      0% { opacity: 0; transform: translateY(30px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(50px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 768px) {
+      .timeline-item {
+        flex-direction: column;
+      }
+
+      .timeline-image,
+      .timeline-content {
+        width: 100%;
+        padding: 0;
+        border: none;
+      }
+
+      .timeline-content::before {
+        left: 0;
+        top: -10px;
+      }
+
+      .team-row {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .hero-text {
+        padding: 20px;
+      }
+
+      section {
+        margin: 30px 10px;
+      }
+    }
+ 
+  </style>
+</head>
+<body>
+
+  <!-- ✅ NAVBAR (disatukan) -->
+  <nav class="bg-white shadow-lg py-4 px-6 md:px-12 rounded-b-xl">
+  <div class="container mx-auto flex justify-between items-center">
+    
+    <!-- Logo -->
+    <a href="index.html" class="flex items-center space-x-2">
+      <img src="Lunar logo.jpg" alt="Lunar Cosmetics Logo" class="h-30 w-20">
+      <span class="text-3xl font-bold text-black tracking-wide">LUNAR COSMETICS</span>
+    </a>
+
+    <!-- Desktop Nav Menu -->
+    <div class="hidden md:flex items-center space-x-6">
+      <a href="index.html" class="text-lg font-medium text-gray-800 hover :text-purple-600 transition">HOME</a>
+
+      <!-- Dropdown Products -->
+      <div class="relative group">
+        <a href="products.html" class="inline-flex items-center text-lg font-medium text-gray-800 hover:text-purple-600 transition">
+          PRODUCTS
+          <svg class="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+          </svg>
+        </a>
+        <div class="absolute hidden group-hover:block bg-white mt-2 rounded-xl shadow-lg z-10">
+          <a href="products.html#Faces Makeup" class="block px-4 py-2 text-gray-700 hover:bg-purple-100">Faces Makeup</a>
+          <a href="products.html#Eyes Makeup" class="block px-4 py-2 text-gray-700 hover:bg-purple-100">Eyes Makeup</a>
+          <a href="products.html#Lips Makeup" class="block px-4 py-2 text-gray-700 hover:bg-purple-100">Lips Makeup</a>
+        </div>
+      </div>
+
+      <a href="services.html" class="text-lg font-medium text-gray-800 hover:text-purple-600 transition">SERVICES</a>
+      <a href="about.html" class="text-lg font-medium text-gray-800 font-bold">ABOUT US</a>
+      <a href="contact.html" class="text-lg font-medium text-gray-800 hover:text-purple-600 transition">CONTACT</a>
+    </div>
+
+    <!-- Mobile Menu Button -->
+    <div class="md:hidden">
+      <button id="mobile-menu-button" class="text-gray-600 focus:outline-none">
+        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile Dropdown Menu -->
+  <div id="mobile-menu" class="hidden md:hidden mt-4 space-y-2">
+    <a href="index.html" class="block px-4 py-2 text-gray-700 hover:bg-purple-100 rounded-lg">Home</a>
+    <div class="relative">
+      <button id="mobile-products-button" class="w-full text-left px-4 py-2 text-gray-700 hover:bg-purple-100 flex justify-between items-center">
+        Products
+        <svg class="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+        </svg>
+      </button>
+      <div id="mobile-products-dropdown" class="hidden pl-6 mt-2 space-y-2">
+        <a href="products.html#Faces Makeup" class="block px-4 py-2 text-gray-700 hover:bg-purple-100 rounded-lg">Faces Makeup</a>
+        <a href="products.html#Eyes Makeup" class="block px-4 py-2 text-gray-700 hover:bg-purple-100 rounded-lg">Eyes Makeup</a>
+        <a href="products.html#Lips Makeup" class="block px-4 py-2 text-gray-700 hover:bg-purple-100 rounded-lg">Lips Makeup</a>
+      </div>
+    </div>
+    <a href="about.html" class="block px-4 py-2 text-gray-700 bg-purple-100 rounded-lg font-bold">About Us</a>
+    <a href="contact.html" class="block px-4 py-2 text-gray-700 hover:bg-purple-100 rounded-lg">Contact</a>
+  </div>
+</nav>
+  <!-- ✅ Sambung kandungan asal awak seperti biasa -->
+  <div class="hero">
+    
+    <div class="hero-text">
+      <h1>The Making of LUNAR</h1>
+    </div>
+  </div>
+
+ <section id="our-story">
+    <h2>🌙🌼Our Story🌼🌙 </h2>
+    <p>LUNAR was born on a quiet, meaningful night — a night that captured the heart of an acne fighter who has long struggled to feel beautiful. In moments of sadness and self-doubt, I would often look up at the moon. Though its surface is far from smooth, it continues to shine brightly, illuminating even the darkest skies. It reminded me that there is strength in vulnerability, and beauty in imperfection.</p>
+
+    <p>The floral element of the brand was inspired by the tuberose flower (harum sundal malam), admired for its enchanting fragrance and timeless elegance. My fascination with this flower began with my all-time favorite film, <em>Pontianak Harum Sundal Malam</em>, where Maya Karin’s haunting beauty left a lasting impression on me. It sparked a deep appreciation for mysterious, graceful femininity.</p>
+
+    <p>LUNAR is more than a beauty brand — it is a reflection of my journey, and a tribute to every woman who has ever struggled with her skin, her confidence, or her worth. It is a celebration of quiet resilience, inner radiance, and the power of embracing who we are — flaws and all.</p>
+
+  </section>
+
+  <section id="tagline">
+    <h2>✨ Our Tagline ✨</h2>
+    <p>Real Women, Real Stories, Real Beauty.</p>
+  </section>
+
+  <section id="vision-mission">
+    <h2>🌠Vision & Mission 🌠</h2>
+    <p><strong>Our Vision:</strong><br> Imperfection is not a barrier to shining brightly.</p>
+    <p><strong>Our Mission:</strong><br> 🌸 To embrace every woman’s journey with beauty that whispers strength, softness, and self-love.</p>
+  </section>
+
+  <section class="timeline-section">
+    <h2 class="timeline-title">🌙✨LUNAR Brand Timeline✨🌙</h2>
+    
+     <div class="timeline-item">
+      <div class="timeline-image">
+        <img src="2021.png" alt="2021">
+      </div>
+      <div class="timeline-content">
+        <h3>✧ 2021 – The Idea Was Born</h3>
+        <p>LUNAR began with a clear vision: a beauty brand that uplifts confidence, speaks to the soul, and celebrates grace — inspired by the night sky and blooming flowers of the dark.</p>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-image">
+        <img src="2022.png" alt="2022">
+      </div>
+      <div class="timeline-content">
+        <h3>✧ 2022 – Laying the Foundation</h3>
+        <p>Brand development began: skin-friendly ingredients, product testing, and a visual identity in navy, gold, and floral elegance.</p>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-image">
+        <img src="2023.png" alt="2023">
+      </div>
+      <div class="timeline-content">
+        <h3>✧ 2023 – Skill & Service Development</h3>
+        <p>LUNAR introduced bridal, event, and personal makeup services — elevating natural beauty with soulful artistry.</p>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-image">
+        <img src="2024.png" alt="2024">
+      </div>
+<div class="timeline-content">
+        <h3>✧ 2024 – Official Brand Launch</h3>
+        <p>Public debut with:<br>
+        - Makeup Services<br>
+        - Lip Gloss, Foundation, Contour Stick & Blusher — crafted in moonlight tones.</p>
+      </div>
+    </div>
+  <div class="timeline-item">
+      <div class="timeline-image">
+        <img src="2025.png" alt="2025">
+      </div>
+      <div class="timeline-content">
+        <h3>✧ 2025 – Recognition & Growth</h3>
+        <p>Collaborations, magazine features & creative campaigns made LUNAR a beauty name known for heart and elegance.</p>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-image">
+        <img src="2026.png" alt="2026">
+      </div>
+      <div class="timeline-content">
+        <h3>✧ 2026 – The First LUNAR Studio</h3>
+        <p>Plans begin for a flagship studio: private consultations, exclusive launches, and a soulful beauty sanctuary.</p>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-image">
+        <img src="2027.png" alt="2027">
+      </div>
+      <div class="timeline-content">
+        <h3>✧ 2027 & Beyond – Expanding with Grace</h3>
+        <p>-Upcoming: Lip Mattes, Eyeshadow Palettes, Setting Sprays<br>
+        -Service growth locally & internationally<br>
+        -LUNAR evolves with elegance and soul.</p>
+         </div>
+    </div>
+  </section>
+
+
+  <section class="team-section">
+    <h2>✦ Team Behind LUNAR ✦</h2>
+    <p class="team-intro">At LUNAR, our team is built on passion, detail, and purpose. Each of us brings something unique — but together, we share one mission: to help others shine in their own skin.</p>
+
+    <div class="team-grid">
+      <div class="team-row row-1">
+         <div class="team-member">
+          <img src="alia.jpg" alt="Noralia Binti Rashid">
+          <h3>Noralia Binti Rashid</h3>
+          <h4>Founder & Creative Director</h4>
+          <p>The heart and soul of LUNAR. Noralia leads the creative vision — from product concepts to storytelling. Her journey as an acne warrior inspires every touch of grace and glow in LUNAR.</p>
+        </div>
+
+        <div class="team-member">
+          <img src="hana.jpg" alt="Nur Ain Farhana Binti Abd Halim">
+          <h3>Nur Ain Farhana Binti Abd Halim</h3>
+          <h4>Admin & Client Support Exec</h4>
+          <p>The first point of contact for many, Hana ensures smooth communication and coordination. With calm energy and precision, she keeps the heart of LUNAR beating.</p>
+        </div>
+
+        <div class="team-member">
+          <img src="clay.jpg" alt="Clayrisa Carmie Anak Pony">
+          <h3>Clayrisa Carmie Anak Pony</h3>
+          <h4>Formulation & Product Research</h4>
+          <p>Clay shapes product ideas into gentle formulas. She works closely with suppliers to ensure every texture and ingredient meets LUNAR’s soft and skin-friendly standards.</p>
+        </div>
+      </div>
+      </div>
+      <div class="team-row row-2">
+        <div class="team-member">
+          <img src="marie.jpg" alt="Marie Grace Lionel">
+          <h3>Marie Grace Lionel</h3>
+          <h4>Packaging & Design Lead</h4>
+          <p>Grace focuses on the elegance and function of each product — from lipstick tubes to blush palettes. Her design style: minimal, refined, and celestial.</p>
+        </div>
+
+        <div class="team-member">
+          <img src="well.jpg" alt="Welna Metcheal Jamirin">
+          <h3>Welna Metcheal Jamirin</h3>
+          <h4>Operations & Service Coordinator</h4>
+          <p>Welna handles logistics, bookings, and event setups. Her eye for detail ensures each LUNAR experience feels seamless, warm, and beautifully personal.</p>
+        </div>
+      </div>
+  </section>
+
+
+  <footer>
+    © 2025 LUNAR. All for assignment purpose.
+  </footer>
+
+</body>
+</html>
